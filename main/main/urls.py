@@ -15,7 +15,15 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from django.http import HttpResponse
+
+def index(request):
+    f = open('../public/bootstrap-3.3.5-dist/index.html')
+    content = f.read()
+    f.close()
+    return HttpResponse(content)
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
+    url(r'^admin/', test),
+    url(r'^', index, name='index'),
 ]
