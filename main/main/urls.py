@@ -14,8 +14,9 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url
-from django.contrib import admin
+from util import koolearn
 from django.http import HttpResponse
+
 
 def index(request):
     f = open('../public/bootstrap-3.3.5-dist/index.html')
@@ -23,7 +24,13 @@ def index(request):
     f.close()
     return HttpResponse(content)
 
+
+def get_all_word(request):
+    spider = koolearn.Spider()
+    spider.get_all_words()
+
+
 urlpatterns = [
-    url(r'^admin/', test),
-    url(r'^', index, name='index'),
+    # url(r'spider/', get_all_word),
+    url(r'^$', index, name='index'),
 ]
