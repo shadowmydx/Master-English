@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 import re
 import urllib2
-from Models.models import Words
+# from Models.models import Words
 
 
 class Spider:
@@ -27,12 +27,15 @@ class Spider:
         return results
 
     def get_all_words_from_url(self, url):
+        total_word = 0
         while url is not None:
             content, url = self.get_content_from_current_url(url)
             print 'parse ' + str(len(content)) + ' words, get next page..'
-            for item in content:
-                word = Words(english_words=item[0], chinese_words=item[1])
-                word.save()
+            total_word += len(content)
+            # for item in content:
+            #     word = Words(english_words=item[0], chinese_words=item[1])
+            #     word.save()
+        print total_word
 
     def get_content_from_current_url(self, url):
         retry = 10
@@ -66,4 +69,5 @@ class Spider:
 
 if __name__ == '__main__':
     spider = Spider()
+    spider.get_all_words()
 

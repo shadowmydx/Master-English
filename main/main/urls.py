@@ -14,8 +14,8 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url
-from util import koolearn
 from django.http import HttpResponse
+from service.WordsService import WordsService
 
 
 def index(request):
@@ -24,13 +24,22 @@ def index(request):
     f.close()
     return HttpResponse(content)
 
+word_service = WordsService()
+
 
 def get_all_word(request):
-    spider = koolearn.Spider()
-    spider.get_all_words()
+    page_index = request.GET.get('index')
+    return HttpResponse(word_service.get_all_words(int(page_index)))
+
+
+def regroup_word(request):
+    word_service.regroup_all_words()
+    return HttpResponse('{status:"success"}')
 
 
 urlpatterns = [
     # url(r'spider/', get_all_word),
     url(r'^$', index, name='index'),
+    url(r'all-word/$', get_all_word),
+    url(r'regroup-word/$', regroup_word),
 ]
