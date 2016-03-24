@@ -37,7 +37,7 @@ body {
     <![endif]-->
   </head>
 
- <body>
+ <body ng-app="routeApp">
 
     <div class="container">
 
@@ -54,14 +54,14 @@ body {
             <a class="navbar-brand" href="#">Master English Studying Tool</a>
           </div>
           <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-              <li class="active"><a href="#">ETC Test</a></li>
-              <li><a href="#">CTE Test</a></li>
-              <li><a href="#">All Words</a></li>
-			  <li><a href="#">Current Words</a></li>
-			  <li><a href="#">Regroup Words</a></li>
-              <li><a href="#">Error Book</a></li>			  
-			  <li class="dropdown">
+            <ul class="nav navbar-nav" ng-controller="navbar">
+              <li ng-mousemove="move($event)" ng-mouseleave="out($event)"><a href="#">ETC Test</a></li>
+              <li ng-mousemove="move($event)" ng-mouseleave="out($event)"><a href="#">CTE Test</a></li>
+              <li ng-mousemove="move($event)" ng-mouseleave="out($event)"><a href="#/list-all">All Words</a></li>
+			  <li ng-mousemove="move($event)" ng-mouseleave="out($event)"><a href="#">Current Words</a></li>
+			  <li ng-mousemove="move($event)" ng-mouseleave="out($event)"><a href="#">Regroup Words</a></li>
+              <li ng-mousemove="move($event)" ng-mouseleave="out($event)"><a href="#">Error Book</a></li>
+			  <li class="dropdown" ng-mousemove="move($event)" ng-mouseleave="out($event)">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Chose Group <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   <li><a href="#">Action</a></li>
@@ -82,17 +82,16 @@ body {
       </nav>
 
       <!-- Main component for a primary marketing message or call to action -->
-      <div class="jumbotron">
-        <h1>Navbar example</h1>
-        <p>This example is a quick exercise to illustrate how the default, static navbar and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
-        <p>
-          <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View navbar docs &raquo;</a>
-        </p>
+      <div class="jumbotron" ng-view>
       </div>
 
     </div> <!-- /container -->
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
+    <script src="../static/js/angular.min.js"></script>
+    <script src="../static/js/angular-route.min.js"></script>
+    <script src="../static/js/app/routeApp.js"></script>
+    <script src="../static/js/app/controllers/main.js"></script>
   </body>
 </html>
