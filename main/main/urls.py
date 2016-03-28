@@ -37,9 +37,22 @@ def regroup_word(request):
     return HttpResponse('{status:"success"}')
 
 
+def group_number(request):
+    data = word_service.get_all_group()
+    return HttpResponse(data)
+
+
+def get_word_by_group(request):
+    page_index = request.GET.get('index')
+    group_index = request.GET.get('group')
+    return HttpResponse(word_service.get_words_by_group(page_index, group_index))
+
+
 urlpatterns = [
     # url(r'spider/', get_all_word),
     url(r'^$', index, name='index'),
     url(r'all-word/$', get_all_word),
     url(r'regroup-word/$', regroup_word),
+    url(r'group-number/$', group_number),
+    url(r'group-word/$', get_word_by_group),
 ]

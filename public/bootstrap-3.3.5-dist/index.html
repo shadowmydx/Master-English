@@ -14,7 +14,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="../static/css/bootstrap.min.css" rel="stylesheet">
-
+    <link href="../static/css/custom.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <style>
 body {
@@ -53,29 +53,23 @@ body {
             </button>
             <a class="navbar-brand" href="#">Master English Studying Tool</a>
           </div>
-          <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav" ng-controller="navbar">
+          <div id="navbar" class="navbar-collapse collapse" ng-controller="navbar">
+            <ul class="nav navbar-nav">
               <li ng-mousemove="move($event)" ng-mouseleave="out($event)"><a href="#">ETC Test</a></li>
               <li ng-mousemove="move($event)" ng-mouseleave="out($event)"><a href="#">CTE Test</a></li>
               <li ng-mousemove="move($event)" ng-mouseleave="out($event)"><a href="#/list-all">All Words</a></li>
-			  <li ng-mousemove="move($event)" ng-mouseleave="out($event)"><a href="#">Current Words</a></li>
+			  <li ng-mousemove="move($event)" ng-mouseleave="out($event)"><a href="#/list">Current Words</a></li>
 			  <li ng-mousemove="move($event)" ng-mouseleave="out($event)"><a href="#">Regroup Words</a></li>
               <li ng-mousemove="move($event)" ng-mouseleave="out($event)"><a href="#">Error Book</a></li>
 			  <li class="dropdown" ng-mousemove="move($event)" ng-mouseleave="out($event)">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Chose Group <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  <li><a href="#">Action</a></li>
-                  <li><a href="#">Another action</a></li>
-                  <li><a href="#">Something else here</a></li>
-                  <li role="separator" class="divider"></li>
-                  <li class="dropdown-header">Nav header</li>
-                  <li><a href="#">Separated link</a></li>
-                  <li><a href="#">One more separated link</a></li>
+                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Chose Group <span class="caret"></span></a>
+                <ul class="dropdown-menu" >
+                  <li><a href="" ng-repeat="n in [] | range:groups" ng-click="setupCurrentGroup($index + 1)">Group {{$index + 1}}</a></li>
                 </ul>
               </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li class="active"><a href="./">Default <span class="sr-only">(current)</span></a></li>
+              <li class="active"><a href="">Group {{getCurrentGroup()}} <span class="sr-only">(current)</span></a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
@@ -92,6 +86,7 @@ body {
     <script src="../static/js/angular.min.js"></script>
     <script src="../static/js/angular-route.min.js"></script>
     <script src="../static/js/app/routeApp.js"></script>
+    <script src="../static/js/app/util/pageUtil.js"></script>
     <script src="../static/js/app/controllers/main.js"></script>
   </body>
 </html>

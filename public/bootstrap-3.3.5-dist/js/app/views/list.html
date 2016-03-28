@@ -1,26 +1,21 @@
-<h1>hello</h1>
 <div>
     <div class="list-group">
-    <a href="#" class="list-group-item">
-        <h4 class="list-group-item-heading">List group item heading</h4>
-        <p class="list-group-item-text">...</p>
+    <a href="" class="list-group-item" ng-repeat="obj in words">
+        <h4 class="list-group-item-heading">{{obj.fields.english_words}}</h4>
+        <p class="list-group-item-text">{{obj.fields.chinese_words}}</p>
      </a>
 </div>
 </div>
 <nav>
   <ul class="pagination">
     <li>
-      <a href="#" aria-label="Previous">
+      <a href="" aria-label="Previous" ng-click="prePage()">
         <span aria-hidden="true">&laquo;</span>
       </a>
     </li>
-    <li><a href="#">1</a></li>
-    <li><a href="#">2</a></li>
-    <li><a href="#">3</a></li>
-    <li><a href="#">4</a></li>
-    <li><a href="#">5</a></li>
+    <li><a href="" ng-repeat="n in [] | range:endIndex - startIndex + 1 | limitTo:pageLimit" ng-click="updatePageItem($index + 1 + startIndex)" ng-class="{markPage:pageContainer[$index + 1 + startIndex]}">{{$index + 1 + startIndex}}</a></li>
     <li>
-      <a href="#" aria-label="Next">
+      <a href="" aria-label="Next" ng-click="nextPage()">
         <span aria-hidden="true">&raquo;</span>
       </a>
     </li>
