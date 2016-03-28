@@ -20,8 +20,6 @@ routeApp.controller('navbar', function ($rootScope, $scope, $http, Current) {
 
 routeApp.controller('ListAll', function ($scope, $http) {
     $scope.isInit = false;
-    $scope.pageLimit = 10;
-    $scope.currentPage = 1;
     $scope.getWordByIndex = function (index) {
         $http.get('all-word?index=' + index).then(function (response) {
             $scope.words = response.data.words;
@@ -61,8 +59,6 @@ routeApp.controller('ListAll', function ($scope, $http) {
 
 routeApp.controller('ListGroup', function ($rootScope, $scope, $http, Current) {
     $scope.isInit = false;
-    $scope.pageLimit = 10;
-    $scope.currentPage = 1;
     $scope.getWordByGroupAndPage = function (page, group) {
         $http.get('group-word?index=' + page + "&group=" + group).then(function (response) {
             $scope.words = response.data.words;
@@ -74,6 +70,7 @@ routeApp.controller('ListGroup', function ($rootScope, $scope, $http, Current) {
         });
     };
     $rootScope.$on('currentGroupChanged', function () {
+        $scope.isInit = false;
         $scope.getWordByGroupAndPage(1, Current.currentGroup);
     });
     $scope.updatePageItem = function (index) {

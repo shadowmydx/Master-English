@@ -1,4 +1,6 @@
 function initPageUtil($scope) {
+    $scope.pageLimit = 10;
+    $scope.currentPage = 1;
     $scope.pageContainer = new Array($scope.pages);
     for (var i = 0; i < $scope.pageContainer.length; i ++) {
         $scope.pageContainer[i] = false;
