@@ -9,6 +9,10 @@ routeApp.config(function ($routeProvider) {
             templateUrl: '../static/js/app/views/list.html',
             controller: 'ListGroup'
       })
+      .when('/etc-test', {
+            templateUrl: '../static/js/app/views/etc.html',
+            controller: 'CteTest'
+      })
       .otherwise({
             templateUrl: '../static/js/app/views/home.html',
       });

@@ -99,3 +99,10 @@ routeApp.controller('ListGroup', function ($rootScope, $scope, $http, Current) {
     };
     $scope.getWordByGroupAndPage(1, Current.currentGroup);
 });
+
+routeApp.controller('CteTest', function ($scope, $http, Current) {
+    $scope.start = false;
+    $scope.startTest = function () {
+        $scope.start = true;
+    };
+});
