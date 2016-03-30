@@ -1,5 +1,6 @@
 routeApp.controller('navbar', function ($rootScope, $scope, $http, $location, Current) {
     $scope.isTrigger = false;
+    $scope.isFinished = false;
     $scope.move = function (e) {
         $(e.currentTarget).addClass("active");
     };
@@ -17,6 +18,17 @@ routeApp.controller('navbar', function ($rootScope, $scope, $http, $location, Cu
         $scope.targetAddr = address;
         if (!$scope.isTrigger) {
             $location.path(address);
+        } else {
+            $scope.showTestWarning();
+        }
+    };
+    $scope.regroup = function () {
+        if (!$scope.isTrigger) {
+            $scope.isFinished = false;
+            $('#regroupModal').modal('show');
+            $http.get('regroup-word/').then(function (response) {
+                $scope.isFinished = true;
+            });
         } else {
             $scope.showTestWarning();
         }

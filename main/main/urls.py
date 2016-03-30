@@ -36,7 +36,9 @@ def get_all_word(request):
 
 def regroup_word(request):
     word_service.regroup_all_words()
-    return HttpResponse('{status:"success"}')
+    result = dict()
+    result['status'] = "success"
+    return HttpResponse(json.dumps(result))
 
 
 def group_number(request):

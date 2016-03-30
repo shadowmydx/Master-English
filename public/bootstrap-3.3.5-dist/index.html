@@ -87,12 +87,34 @@ body {
                 </div>
               </div>
             </div>
+            <div class="modal fade" id="regroupModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" >Regrouping...</h4>
+                  </div>
+                  <div class="modal-body">
+                    <div ng-hide="isFinished">
+                        Regroup will regroup words, may take a while, please wait...<br />
+                        <img src="../static/img/loading.gif"/>
+                    </div>
+                      <div ng-hide="!isFinished">
+                        All group is finishing.<br />
+                      </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-disabled="!isFinished">OK</button>
+                  </div>
+                </div>
+              </div>
+            </div>
             <ul class="nav navbar-nav">
               <li ng-mousemove="move($event)" ng-mouseleave="out($event)"><a href="" ng-click="jumpTo('/etc-test')">ETC Test</a></li>
               <li ng-mousemove="move($event)" ng-mouseleave="out($event)"><a href="" ng-click="jumpTo('/')">CTE Test</a></li>
               <li ng-mousemove="move($event)" ng-mouseleave="out($event)"><a href="" ng-click="jumpTo('/list-all')">All Words</a></li>
 			  <li ng-mousemove="move($event)" ng-mouseleave="out($event)"><a href="" ng-click="jumpTo('/list')">Current Words</a></li>
-			  <li ng-mousemove="move($event)" ng-mouseleave="out($event)"><a href="" ng-click="jumpTo('/')">Regroup Words</a></li>
+			  <li ng-mousemove="move($event)" ng-mouseleave="out($event)"><a href="" ng-click="regroup()">Regroup Words</a></li>
               <li ng-mousemove="move($event)" ng-mouseleave="out($event)"><a href="" ng-click="jumpTo('/')">Error Book</a></li>
 			  <li class="dropdown" ng-mousemove="move($event)" ng-mouseleave="out($event)">
                 <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Chose Group <span class="caret"></span></a>
