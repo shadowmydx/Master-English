@@ -169,6 +169,7 @@ routeApp.controller('EtcTest', function ($rootScope, $scope, $http, Current) {
     $rootScope.$on('testEnd', function () {
         if ($scope.start == true) {
             $http.get('end-test?type=etc_start').then(function (response) {
+                $scope.start = false;
             });
         }
     });
