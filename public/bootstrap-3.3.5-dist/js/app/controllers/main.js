@@ -1,4 +1,5 @@
-routeApp.controller('navbar', function ($rootScope, $scope, $http, Current) {
+routeApp.controller('navbar', function ($rootScope, $scope, $http, $location, Current) {
+    $scope.isTrigger = false;
     $scope.move = function (e) {
         $(e.currentTarget).addClass("active");
     };
@@ -9,13 +10,40 @@ routeApp.controller('navbar', function ($rootScope, $scope, $http, Current) {
         $scope.groups = response.data.groups
         console.log(response.data)
     });
+    $scope.showTestWarning = function () {
+        $('#warningModal').modal('show');
+    };
+    $scope.jumpTo = function (address) {
+        $scope.targetAddr = address;
+        if (!$scope.isTrigger) {
+            $location.path(address);
+        } else {
+            $scope.showTestWarning();
+        }
+    };
     $scope.setupCurrentGroup = function (index) {
-        Current.currentGroup = index;
-        $rootScope.$broadcast('currentGroupChanged');
+        if (!$scope.isTrigger) {
+            Current.currentGroup = index;
+            $rootScope.$broadcast('currentGroupChanged');
+        } else {
+             $('#alertModal').modal('show');
+        }
     };
     $scope.getCurrentGroup = function () {
         return Current.currentGroup;
     };
+    $scope.switchToTrigger = function () {
+        $scope.isTrigger = !$scope.isTrigger;
+    };
+    $scope.sureOut = function () {
+        $('#warningModal').modal('hide');
+        $scope.switchToTrigger();
+        $rootScope.$broadcast('testEnd');
+        $location.path($scope.targetAddr);
+    };
+    $rootScope.$on('testStart', function () {
+        $scope.switchToTrigger();
+    });
 });
 
 routeApp.controller('ListAll', function ($scope, $http) {
@@ -100,9 +128,36 @@ routeApp.controller('ListGroup', function ($rootScope, $scope, $http, Current) {
     $scope.getWordByGroupAndPage(1, Current.currentGroup);
 });
 
-routeApp.controller('CteTest', function ($scope, $http, Current) {
+routeApp.controller('EtcTest', function ($rootScope, $scope, $http, Current) {
     $scope.start = false;
-    $scope.startTest = function () {
-        $scope.start = true;
+    $scope.score = 0;
+    $scope.userAnswer = "";
+    $scope.getOneQuestion = function () {
+        $http.get('group-etc-test?group=' + Current.currentGroup).then(function (response) {
+            $scope.question = response.data;
+            if ($scope.status = 'finished') {
+
+            }
+        });
     };
+    $scope.startTest = function () {
+        $http.get('end-test?type=etc_start').then(function (response) { // for god sake someone refresh the browser
+            $scope.start = true;
+            $scope.score = 0;
+            $rootScope.$broadcast('testStart');
+            $scope.getOneQuestion();
+        });
+    };
+    $scope.getOneQuestionAndJudge = function () {
+        if ($scope.userAnswer === $scope.question.answer) {
+            $scope.score ++;
+        }
+        $scope.getOneQuestion();
+    };
+    $rootScope.$on('testEnd', function () {
+        if ($scope.start == true) {
+            $http.get('end-test?type=etc_start').then(function (response) {
+            });
+        }
+    });
 });

@@ -11,7 +11,7 @@ routeApp.config(function ($routeProvider) {
       })
       .when('/etc-test', {
             templateUrl: '../static/js/app/views/etc.html',
-            controller: 'CteTest'
+            controller: 'EtcTest'
       })
       .otherwise({
             templateUrl: '../static/js/app/views/home.html',

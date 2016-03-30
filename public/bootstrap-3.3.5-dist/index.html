@@ -54,13 +54,46 @@ body {
             <a class="navbar-brand" href="#">Master English Studying Tool</a>
           </div>
           <div id="navbar" class="navbar-collapse collapse" ng-controller="navbar">
+            <div class="modal fade" id="warningModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Warning: You are on a test</h4>
+                  </div>
+                  <div class="modal-body">
+                    You are on a test, are you sure you want to end it now ?
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" ng-click="sureOut()">I'm sure</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal fade" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" >Alert: You are on a test</h4>
+                  </div>
+                  <div class="modal-body">
+                    You can't switch group while on a test, please do it later.
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+                  </div>
+                </div>
+              </div>
+            </div>
             <ul class="nav navbar-nav">
-              <li ng-mousemove="move($event)" ng-mouseleave="out($event)"><a href="#/etc-test">ETC Test</a></li>
-              <li ng-mousemove="move($event)" ng-mouseleave="out($event)"><a href="#">CTE Test</a></li>
-              <li ng-mousemove="move($event)" ng-mouseleave="out($event)"><a href="#/list-all">All Words</a></li>
-			  <li ng-mousemove="move($event)" ng-mouseleave="out($event)"><a href="#/list">Current Words</a></li>
-			  <li ng-mousemove="move($event)" ng-mouseleave="out($event)"><a href="#">Regroup Words</a></li>
-              <li ng-mousemove="move($event)" ng-mouseleave="out($event)"><a href="#">Error Book</a></li>
+              <li ng-mousemove="move($event)" ng-mouseleave="out($event)"><a href="" ng-click="jumpTo('/etc-test')">ETC Test</a></li>
+              <li ng-mousemove="move($event)" ng-mouseleave="out($event)"><a href="" ng-click="jumpTo('/')">CTE Test</a></li>
+              <li ng-mousemove="move($event)" ng-mouseleave="out($event)"><a href="" ng-click="jumpTo('/list-all')">All Words</a></li>
+			  <li ng-mousemove="move($event)" ng-mouseleave="out($event)"><a href="" ng-click="jumpTo('/list')">Current Words</a></li>
+			  <li ng-mousemove="move($event)" ng-mouseleave="out($event)"><a href="" ng-click="jumpTo('/')">Regroup Words</a></li>
+              <li ng-mousemove="move($event)" ng-mouseleave="out($event)"><a href="" ng-click="jumpTo('/')">Error Book</a></li>
 			  <li class="dropdown" ng-mousemove="move($event)" ng-mouseleave="out($event)">
                 <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Chose Group <span class="caret"></span></a>
                 <ul class="dropdown-menu" >

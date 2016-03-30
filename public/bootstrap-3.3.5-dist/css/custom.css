@@ -4,3 +4,8 @@
     background-color: #eee !important;
     border-color: #ddd !important
 }
+
+.customAnswer {
+    font: 18px/20px 'MontserratRegular', Helvetica, Arial, sans-serif !important;
+    color: #222 !important;
+}

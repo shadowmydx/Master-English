@@ -16,6 +16,8 @@ Including another URLconf
 from django.conf.urls import url
 from django.http import HttpResponse
 from service.WordsService import WordsService
+from util import SessionGenerator
+import json
 
 
 def index(request):
@@ -48,6 +50,34 @@ def get_word_by_group(request):
     return HttpResponse(word_service.get_words_by_group(page_index, group_index))
 
 
+def start_etc_test(request):
+    group_index = request.GET.get('group')
+    if 'etc_start' not in request.session:
+        request.session['etc_start'] = True
+        SessionGenerator.SessionGenerator.add_item('etc_start', word_service.get_etc_words(group_index))
+    try:
+        generator = SessionGenerator.SessionGenerator.get_item('etc_start')
+        result = generator.next()
+        return HttpResponse(result)
+    except StopIteration:
+        result = dict()
+        result['status'] = 'finished'
+        request.session.pop('etc_start')
+    except KeyError:
+        result = dict()
+        result['status'] = 'expired'
+        request.session.pop('etc_start')
+    return HttpResponse(json.dumps(result))
+
+
+def end_test(request):
+    test_type = request.GET.get('type')
+    request.session.pop(test_type)
+    result = dict()
+    result['status'] = 'success'
+    return HttpResponse(json.dumps(result))
+
+
 urlpatterns = [
     # url(r'spider/', get_all_word),
     url(r'^$', index, name='index'),
@@ -55,4 +85,6 @@ urlpatterns = [
     url(r'regroup-word/$', regroup_word),
     url(r'group-number/$', group_number),
     url(r'group-word/$', get_word_by_group),
+    url(r'group-etc-test/$', start_etc_test),
+    url(r'end-test/$', end_test),
 ]

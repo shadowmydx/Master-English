@@ -6,28 +6,44 @@
 <p><a class="btn btn-primary btn-large" href="" ng-click="startTest()">Let's Start! &raquo;</a></p>
 </div>
 <div class="hero-unit" contenteditable="true" ng-hide="!start">
-    <div class="row">
-        <div class="col-md-4"></div>
-        <div class="col-md-1"></div>
-        <div class="col-md-4">dddd</div>
-        <div class="col-md-4"></div>
-    </div>
-    <div class="row">
-        <div class="col-md-4"></div>
-        <div class="col-md-1"></div>
-        <div class="col-md-4">dddd</div>
-        <div class="col-md-4"></div>
-    </div>
-    <div class="row">
-        <div class="col-md-4"></div>
-        <div class="col-md-1"></div>
-        <div class="col-md-4">dddd</div>
-        <div class="col-md-4"></div>
-    </div>
-    <div class="row">
-        <div class="col-md-4"></div>
-        <div class="col-md-1"></div>
-        <div class="col-md-4">dddd</div>
-        <div class="col-md-4"></div>
-    </div>
+    <form name="questionArea">
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-1"></div>
+            <div class="col-md-4 customAnswer"><h4>What is "{{question.word}}" ?</h4></div>
+            <div class="col-md-4">total score: {{score}}</div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4 customAnswer"><input type="radio" ng-model="userAnswer" ng-value="question.options[0]">A. {{question.options[0]}}</div>
+            <div class="col-md-4"></div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4 customAnswer"><input type="radio" ng-model="userAnswer" ng-value="question.options[1]">B. {{question.options[1]}}</div>
+            <div class="col-md-4"></div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4 customAnswer"><input type="radio" ng-model="userAnswer" ng-value="question.options[2]">C. {{question.options[2]}}</div>
+            <div class="col-md-4"></div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4 customAnswer"><input type="radio" ng-model="userAnswer" ng-value="question.options[3]">D. {{question.options[3]}}</div>
+            <div class="col-md-4"></div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4"></div>
+            <div class="col-md-4"></div>
+            <div class="col-md-4"><a class="btn btn-primary btn-large" href="" ng-click="getOneQuestionAndJudge()">Next &raquo;</a></div>
+
+        </div>
+    </form>
 </div>

@@ -71,3 +71,20 @@ class WordsService:
             data_set['pages'] = all_data / PAGE_SIZE + 1
         return json.dumps(data_set)
 
+    @staticmethod
+    def get_etc_words(group_index):
+        group_index = int(group_index)
+        group_words = Words.objects.filter(group=group_index)
+        chinese_meaning = [obj.chinese_words for obj in group_words]
+        group_dict = dict()
+        for item in group_words:
+            group_dict[item.english_words] = item
+        for count in xrange(len(group_dict.keys())):
+            question = dict()
+            key = random.choice(group_dict.keys())
+            question['options'] = random.sample(chinese_meaning, 3) + [group_dict[key].chinese_words]
+            question['answer'] = group_dict[key].chinese_words
+            random.shuffle(question['options'])
+            question['word'] = group_dict[key].english_words
+            question['status'] = 'start'
+            yield json.dumps(question, encoding='utf-8')
