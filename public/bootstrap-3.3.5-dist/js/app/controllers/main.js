@@ -41,7 +41,7 @@ routeApp.controller('navbar', function ($rootScope, $scope, $http, $location, Cu
         $rootScope.$broadcast('testEnd');
         $location.path($scope.targetAddr);
     };
-    $rootScope.$on('testStart', function () {
+    $rootScope.$on('testChange', function () {
         $scope.switchToTrigger();
     });
 });
@@ -144,7 +144,7 @@ routeApp.controller('EtcTest', function ($rootScope, $scope, $http, Current) {
         $http.get('end-test?type=etc_start').then(function (response) { // for god sake someone refresh the browser
             $scope.start = true;
             $scope.score = 0;
-            $rootScope.$broadcast('testStart');
+            $rootScope.$broadcast('testChange');
             $scope.getOneQuestion();
         });
     };
@@ -153,6 +153,18 @@ routeApp.controller('EtcTest', function ($rootScope, $scope, $http, Current) {
             $scope.score ++;
         }
         $scope.getOneQuestion();
+    };
+    $scope.finishTest = function () {
+        $http.get('end-test?type=etc_start').then(function (response) {
+            $scope.start = false;
+            $scope.score = 0;
+            $scope.userAnswer = "";
+            $rootScope.$broadcast('testChange');
+            $('#finishModal').modal('hide');
+        });
+    };
+    $scope.finishTestByHand = function () {
+        $('#finishModal').modal('show');
     };
     $rootScope.$on('testEnd', function () {
         if ($scope.start == true) {
