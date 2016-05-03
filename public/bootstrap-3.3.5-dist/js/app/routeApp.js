@@ -13,6 +13,10 @@ routeApp.config(function ($routeProvider) {
             templateUrl: '../static/js/app/views/etc.html',
             controller: 'EtcTest'
       })
+      .when('/error-book', {
+            templateUrl: '../static/js/app/views/error.html',
+            controller: 'ErrorBook'
+      })
       .otherwise({
             templateUrl: '../static/js/app/views/home.html',
       });

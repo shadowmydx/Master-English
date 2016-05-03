@@ -186,3 +186,7 @@ routeApp.controller('EtcTest', function ($rootScope, $scope, $http, Current) {
         }
     });
 });
+
+routeApp.controller('ErrorBook', function ($rootScope, $scope, $http, Current) {
+
+});
